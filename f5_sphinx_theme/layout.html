@@ -46,11 +46,24 @@
     <div class="row">
       <div class="col-sm-3 col-md-3 sidebar">
          <h4><a href="{{ url_root }}">{{ project }} {{ release }}</a></h4>
-        {%- if sidebars != None %}
-          {%- for sidebartemplate in sidebars %}
-            {%- include sidebartemplate %}
-          {%- endfor %}
-        {% endif %}
+      {% include "Searchbox.html" %}
+      
+        {# This section Copyright (c) 2013 Dave Snider #}
+          
+        {# The singlehtml builder doesn't handle this toctree call when the
+          toctree is empty. Skip building this for now.
+         #}
+          {% if 'singlehtml' not in builder %}
+            {% set global_toc = toctree(maxdepth=2|int, collapse=True, includehidden=True) %}
+          {% endif %}
+          {% if global_toc %}
+            {{ global_toc }}
+          {% else %}
+            {% include "localtoc.html" %}
+          {% endif %}
+        
+      {# End of section #}
+      
       </div>
       <div class="col-md-offset-3 col-sm-offset-3 main">
         <h4>

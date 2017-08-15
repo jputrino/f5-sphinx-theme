@@ -29,22 +29,43 @@
                 <div class="menu-panel soft-hide" id="ProductsSubmenu">
                   <div class="container">
                     <ul class="submenu col-sm-11">
-                      <li class="third"><span class="a-mm-h">Connectors</span>
+                      <li class="third"><span class="a-mm-h">Container Connectors</span>
                         <ul>
-                          <li><a href="/products/connectors/marathon-bigip-ctlr/latest" data-link-type="Nav: Mega">F5 Marathon BIG-IP Controller</a></li>
-                          <li><a href="/products/connectors/marathon-asp-ctlr/latest" data-link-type="Nav: Mega">F5 Marathon ASP Controller</a></li>
-                          <li><a href="/products/connectors/k8s-bigip-ctlr/latest" data-link-type="Nav: Mega">F5 Kubernetes BIG-IP Controller</a></li>
-                          <li><a href="/products/connectors/f5-kube-proxy/latest" data-link-type="Nav: Mega">F5 Kubernetes Proxy</a></li>
+                          <li><a href="/products/connectors/marathon-bigip-ctlr/latest" data-link-type="Nav: Mega">F5 BIG-IP Controller for Marathon</a></li>
+                          <li><a href="/products/connectors/marathon-asp-ctlr/latest" data-link-type="Nav: Mega">F5 ASP Controller for Marathon</a></li>
+                          <li><a href="/products/connectors/k8s-bigip-ctlr/latest" data-link-type="Nav: Mega">F5 BIG-IP Controller for Kubernetes</a></li>
+                          <li><a href="/products/connectors/f5-kube-proxy/latest" data-link-type="Nav: Mega">F5-kube-proxy</a></li>
+                          <li><a href="/products/connectors/cf-bigip-ctlr/latest" data-link-type="Nav: Mega">F5 BIG-IP Controller for Cloud Foundry</a></li>
                         </ul>
-                        <!--span class="seemore"><a data-link-type="Nav: Mega" href="/products/connectors">See all </a></--span-->
-                      </li>
-                      <li class="divider"></li>
-                      <li class="third"><span class="a-mm-h">Application Services Proxy</span>
+                        <!-- unnecessary right now, we have them all listed>
+                      <span class="seemore"><a data-link-type="Nav: Mega" href="/products/connectors">See all </a></span><-->
+                      <span class="a-mm-h">Application Services Proxy</span>
                         <ul>
                           <li><a href="/products/asp/latest" data-link-type="Nav: Mega">F5 Application Services Proxy</a></li>
                         </ul>
-                        <!--span class="seemore"><a href="/products/">See all </a></span-->
+                        <!-- unnecessary>
+                        <span class="seemore"><a href="/products/asp/latest">See all </a></span>
+                        --->
                       </li>
+                       <li class="divider"></li>
+                  <li class="third"><span class="a-mm-h">OpenStack</span>
+                    <ul>
+                      <li><a href="/products/openstack/agent/latest" data-link-type="Nav: Mega">F5 Agent - OpenStack Neutron</a></li>
+                      <li><a href="/products/openstack/lbaasv2-driver/latest" data-link-type="Nav: Mega">F5 Driver - OpenStack LBaaS</a></li>
+                      <li><a href="/products/openstack/heat-plugins/latest" data-link-type="Nav: Mega">F5 Plugins - OpenStack Heat</a></li>
+                     </ul>
+                    <!--
+                    <span class="seemore"><a href="/products/index.html">See all </a></span>
+                    --->
+                  </li>
+                  <li class="divider"></li>
+                  <li class="third"><span class="a-mm-h">Orchestration Templates</span>
+                  <ul>
+                  <li><a href="/products/templates/openstack-heat/latest" data-link-type="Nav: Mega">F5 HOT Library - OpenStack Heat</a></li>
+                  </ul>
+                    <!--
+                    <span class="seemore"><a href="/products/index.html">See all </a></span>
+                    --->
                     </ul>
                   </div>
                 </div>
@@ -62,15 +83,18 @@
                           <li><a href="/containers/latest/marathon/" data-link-type="Nav: Mega">Mesos Marathon</a></li>
                           <li><a href="/containers/latest/kubernetes/" data-link-type="Nav: Mega">Kubernetes</a></li>
                           <li><a href="/containers/latest/openshift/" data-link-type="Nav: Mega">RedHat OpenShift</a></li>
+                          <li><a href="/containers/latest/cloudfoundry/" data-link-type="Nav: Mega">Cloud Foundry</a> </li>
                         </ul>
-                        <span class="seemore"><a data-link-type="Nav: Mega" href="/containers/latest/">View details </a></span>
+                        <!--- HIDE, ALL ARE CURRENTLY DISPLAYED>
+                        <span class="seemore"><a data-link-type="Nav: Mega" href="/containers/latest/">See all </a></span>
+                        --->
                       </li>
                     </ul>
                   </div>
                 </div>
               </li>
               <li>
-                <a href="#">Clouds
+                <a href="/cloud">Clouds
                   <span class="indicator"><span class="arrow-up"></span></span>
                 </a>
 
@@ -81,7 +105,9 @@
                         <ul>
                           <li><a href="/cloud/openstack/" data-link-type="Nav: Mega">OpenStack</a></li>
                         </ul>
-                        <!--span class="seemore"><a data-link-type="Nav: Mega" href="/cloud/">See all </a></span-->
+                        <!-- unnecessary right now, we only have OpenStack in the cloud section>
+                        <span class="seemore"><a data-link-type="Nav: Mega" href="/cloud/">See all </a></span>
+                        <-->
                       </li>
                     </ul>
                   </div>
@@ -100,17 +126,21 @@
                           <li><a target="_blank" data-link-type="Nav: Mega" href="https://hub.docker.com/r/f5networks/" class="internalLink">Docker Hub</a></li>
                           <li><a target="_blank" data-link-type="Nav: Mega" href="https://store.docker.com/images/f5networks-asp" class="internalLink">Docker Store</a></li>
                         </ul>
-                      </li>
-                      <li class="divider"></li>
-
-                      <li class="third">
                         <span class="a-mm-h">OpenSource</span>
                         <ul>
-                          <li><a target="_blank" data-link-type="Nav: Mega" href="https://github.com/F5Networks" class="internalLink">GitHub</a></li>
+                          <li><a target="_blank" data-link-type="Nav: Mega" href="https://github.com/F5Networks" class="internalLink">F5Networks on GitHub</a></li>
+                          <li><a target="_blank" data-link-type="Nav: Mega" href="https://github.com/F5DevCentral" class="internalLink">F5DevCentral on GitHub</a></li>
                         </ul>
                       </li>
                       <li class="divider"></li>
-
+                      <li class="third">
+                        <span class="a-mm-h">Training & Labs</span>
+                         <ul>
+                          <li><p>Learn how to get the most out of the F5 platform</p></li>
+                          <li><a href="/training/community">Community</a></li>
+                        </ul>
+                      </li>
+                      <li class="divider"></li>
                       <li class="third">
                         <a href="//university.f5.com" class="a-mm-h internalLink" target="_blank" data-link-type="Nav: Mega">F5 University</a>
                         <ul>

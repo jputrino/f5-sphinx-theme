@@ -1,3 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<div class="col-sm-3 col-md-3 sidebar-links">
+  <h3><a href="{{ pathto(master_doc) }}">{{ title }} {{ release }}</a></h3>
+  {% if sidebars != None %}
+    {% include localtoc.html %}
+    {% include globaltoc.html %}
+  {% endif %}
+  <hr>
+  {% if hasdoc(pagename) %}
+      {% if display_github %}
+      {% if check_meta and 'github_url' in meta %}
+        <!-- User defined GitHub URL -->
+        <a href="{{ meta['github_url'] }}" class="fa fa-github"> {{ _('Edit on GitHub') }}</a>
+      {% else %}
+        <a href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/blob/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-github"> {{ _('Edit on GitHub') }}</a>
+      {% endif %}
+    {% elif display_gitlab %}
+      {% if check_meta and 'gitlab_url' in meta %}
+        <!-- User defined GitLab URL -->
+        <a href="{{ meta['gitlab_url'] }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>
+      {% else %}
+        <a href="https://{{ gitlab_host|default("gitlab.com") }}/{{ gitlab_user }}/{{ gitlab_repo }}/blob/{{ gitlab_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}" class="fa fa-gitlab"> {{ _('Edit on GitLab') }}</a>
+      {% endif %}
+    {% elif show_source and source_url_prefix %}
+      <a href="{{ source_url_prefix }}{{ pagename }}{{ suffix }}">{{ _('View page source') }}</a>
+    {% elif show_source and has_source and sourcename %}
+      <a href="{{ pathto('_sources/' + sourcename, true)|e }}" rel="nofollow"> {{ _('View page source') }}</a>
+    {% endif %}
+  {% endif %}
+  
+</div>

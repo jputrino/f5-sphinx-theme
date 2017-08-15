@@ -64,38 +64,20 @@
 <div id="content">
   <div class="container-fluid">
     {% block content %}
+    
     <div class="row">
-      <div class="rst-content">
-      {% include "breadcrumbs.html" %}
         <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            {% block body %}{% endblock %}
+              {% include "breadcrumbs.html" %}
+              {% block body %}{% endblock %}
            </div>
         </div>
-      {% include "footer.html" %}
       </div>
       <div class="sidebartoc"> {{ sidebar }} </div>
     </div>
-  </div>
+{% include "footer.html" %}
 {% endblock %}
 </div>
-
-<section>
-
-      {# MOBILE NAV, TRIGGLES SIDE NAV ON TOGGLE #}
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        {% block mobile_nav %}
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="{{ pathto(master_doc) }}">{{ project }}</a>
-        {% endblock %}
-      </nav>
-
-
-      {# PAGE CONTENT #}
-      
-
-
-    </section>
 
   {% block scripts %}
   <!-- Bootstrap core JavaScript
@@ -105,8 +87,9 @@
     <script type="text/javascript">
       jQuery.noConflict(true)
     </script>
-  <script src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
+    <script src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
 {% endblock %}
-{% endblock %}
+
+{%- block footer %}{% endblock %}
 </body>
 </html>

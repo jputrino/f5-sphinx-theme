@@ -1,0 +1,25 @@
+{% if meta is defined and meta is not none %}
+{% set check_meta = True %}
+{% else %}
+{% set check_meta = False %}
+{% endif %}
+
+{% if check_meta and 'github_url' in meta %}
+{% set display_github = True %}
+{% endif %}
+
+{% if check_meta and 'gitlab_url' in meta %}
+{% set display_gitlab = True %}
+{% endif %}
+
+{% block breadcrumbs %}
+<div class="breadcrumb">
+  <ul>
+    <li><a href="{{ pathto(master_doc) }}">{{ _('Docs') }}</a> &raquo;</li>
+      {% for doc in parents %}
+          <li><a href="{{ doc.link|e }}">{{ doc.title }}</a> &raquo;</li>
+      {% endfor %}
+    <li>{{ title }}</li>
+  </ul>
+</div>
+{% endblock %}

@@ -64,18 +64,23 @@
 <div id="content">
   <div class="container-fluid">
     {% block content %}
-    
-    <div class="row">
-        <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
+      <div class="container">
+        <div class="row">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div itemprop="articleBody">
               {% include "breadcrumbs.html" %}
               {% block body %}{% endblock %}
-           </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="sidebartoc"> {{ sidebar }} </div>
+    <div class="sticky-top">
+    <div class="sidebartoc"> {{ sidebar }} </div>
     </div>
-{% include "footer.html" %}
+  </div>
+  <div class="sticky-bottom">
+    {% include "footer.html" %}
+  </div>
 {% endblock %}
 </div>
 

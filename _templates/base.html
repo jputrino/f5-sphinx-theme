@@ -57,30 +57,56 @@
 {% block header %}
   {% include "header.html" %}
 {% endblock %}
-  {% block extrabody %} {% endblock %}
+
+{% block extrabody %}
+{% endblock %}
 
 <div id="content">
   <div class="container-fluid">
-  {% block content %}
-  <div class="row">
-    {{ document }}
-    {{ sidebar2 }}
+    {% block content %}
+    <div class="row">
+      <div class="rst-content">
+      {% include "breadcrumbs.html" %}
+        <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            {% block body %}{% endblock %}
+           </div>
+        </div>
+      {% include "footer.html" %}
+      </div>
+      <div class="sidebartoc"> {{ sidebar }} </div>
+    </div>
   </div>
-    
+{% endblock %}
 </div>
-    {% endblock %}</div>
-{% block footer %}
-  {% include "footer.html" %}
+
+<section>
+
+      {# MOBILE NAV, TRIGGLES SIDE NAV ON TOGGLE #}
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        {% block mobile_nav %}
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="{{ pathto(master_doc) }}">{{ project }}</a>
+        {% endblock %}
+      </nav>
+
+
+      {# PAGE CONTENT #}
+      
+
+
+    </section>
+
   {% block scripts %}
   <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
     <script type="text/javascript">
       jQuery.noConflict(true)
     </script>
-  {% endblock %}
+  <script src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
+{% endblock %}
 {% endblock %}
 </body>
 </html>

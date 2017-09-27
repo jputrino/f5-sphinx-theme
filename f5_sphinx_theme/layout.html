@@ -2,7 +2,7 @@
 {% extends "classic/layout.html" %}
 
 {% set css_files = css_files + ["_static/css/f5.css", "_static/css/custom.css"] %}
-{# set script_files = script_files + ["https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "_static/js/bootstrap.min.js"] #}
+{# set script_files = script_files + ["https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "_static/js/bootstrap.min.js", "_static/js/clouddocs.js"] #}
 
 {%- block extrahead %}
 <!--
@@ -74,12 +74,14 @@
 {% endblock %}
 {%- block footer %}
   {% include "footer.html" %}
-  <!-- Bootstrap core JavaScript
-  ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
-  <script type="text/javascript">
-    jQuery.noConflict(true)
-  </script>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
+<script src="{{ pathto('_static/js/clouddocs.js', 1) }}"></script>
+<script type="text/javascript">
+  jQuery.noConflict(true)
+</script>
 {%- endblock %}

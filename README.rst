@@ -105,7 +105,7 @@ If you're including a multi-line print-out, format it as code as shown below:
 
 Copyright
 ---------
-Copyright 2017 F5 Networks Inc.
+Copyright 2018 F5 Networks Inc.
 
 License
 -------

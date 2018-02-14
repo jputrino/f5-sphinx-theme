@@ -2,11 +2,11 @@
 {% extends "classic/layout.html" %}
 
 {% set css_files = css_files + ["_static/css/f5.css", "_static/css/custom.css"] %}
-{# set script_files = script_files + ["https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "_static/js/bootstrap.min.js"] #}
+{# set script_files = script_files + ["https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js", "_static/js/bootstrap.js", "_static/js/bootstrap.bundle.js" ] #}
 
 {%- block extrahead %}
 <!--
-# Copyright 2017 F5 Networks
+# Copyright 2018 F5 Networks
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -77,8 +77,10 @@
   <!-- Bootstrap core JavaScript
   ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+  <script src="{{ pathto('_static/js/bootstrap.js/bootstrap.min.js', 1) }}"></script>
+  <script src="{{ pathto('_static/js/bootstrap.bundle.js/bootstrap.bundle.min.js', 1) }}"></script>
   <script type="text/javascript">
     jQuery.noConflict(true)
   </script>

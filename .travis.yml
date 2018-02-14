@@ -2,6 +2,10 @@ sudo: required
 env:
   global:
   - DIST_REPO="f5-sphinx-theme"
+  - USER_REPO=$(echo $TRAVIS_REPO_SLUG | cut -f -1 -d / )
+  - BUILD_HTML_DIR=$TRAVIS_BUILD_DIR/test-deploy/docs/_build/html
+  - $AWS_STAGING="https://d3s2z99mfhr69y.cloudfront.net"
+  - secure: uoYDUK5qJL0pWb1/kGRvuxi94B4q6j1mm9lMaU9bDp/85dQnAk+VCpsTYncBrTiB20M91kTccrjMS6rz5njadahjAuXrWEKw2zXhY8xY0/9N46k/CQUV+CnErK4jYi8yJ8853eY0a67Zy4oCtjPP2PQMSD3dsur5MZ98lmlA2JknM3AiaqAXzBgbo3EtcrTUcJ1HGEaWBx7shoDQyCAsByiT5R6v8boyzgF6mI6c78BDeH41CKhxszJaCLseYkDQZmrLgKAGoeEgY8uZGRmzJ80uMhGgY6vz0/9+6pGJO581+aFp5HRe83uZ3MMToqiDUb8JCPOo2FWBgKxmaGGaxFjVqAcfBr5ABJ4rmejOUVKz9xgh69DoZNJnbVqVaPDKdoWo6YJhXKRq+I6u+IWyXqXlEA4BXWH+nPKw+JfSq7Ie8MQDPvgBGqM1HFER13RR2d7VgYnzBUdHRozHV5lBAV+U6nPvIOUYeeS0s2dBWQBDo5Vy/pzp3tFQuO/7DCS+LCuR5qM5FsPc1Cv1P7M42HQUpnbEEtvkNz2KPym+R5A4dLRXPsk1HTLlwmdlkHqJf5rVTTx+zyjTfus17CXkD/bDrAhqa1ZkHKxaGsXq2tK9byucikcb/03GYD2StSmFFGxiDqajwKvD27Vap4eyi99K16zC9vBZfQy8xE0MbN8=
 services:
 - docker
 language: python
@@ -9,17 +13,39 @@ python:
 - '2.7'
 before_install:
 - git config --global user.email "OpenStack_TravisCI@f5.com"
-- git config --global user.name "Travis F5 Openstack"
+- git config --global user.name "f5-travisci"
 install:
 - gem install html-proofer
 - pip install ./
 script:
-- htmlproofer --check_html --checks-to-ignore "LinkCheck,ImageCheck,ScriptCheck" --report_invalid_tags --report-script-embeds f5_sphinx_theme/
+- htmlproofer --check_html --checks-to-ignore "LinkCheck,ImageCheck,ScriptCheck" --report_invalid_tags
+  --report-script-embeds f5_sphinx_theme/
+- test/theme-test.sh
 deploy:
-- provider: pypi
-  user: $PYPI_USER
-  password: $PYPI_PASSWORD
-  server: https://pypi.python.org.pypi
-  on:
-    tags: true
-  skip_cleanup: true
+  matrix:
+  - provider: s3
+    skip_cleanup: true
+    on:
+      all_branches: true
+    access_key_id:
+      secure: kt81AMmRezo56y0LWR7Uo1u4cil0skTMMt8DLZ0Lp3gUt7VPAq3XNRMpmi9WW8za80905SHZXNiakiwf2BWfosZka1O1t4Ja5RwZmAH5TcIaCzMRoOo1VDJtvMTtQweeIlrNjebGaxlPmc0+xYIUC1er0Hrlq07OvQZ2jQ9d4WNsVo1KsONy3MaKeTwhMpULr4HZjP6Mi9Llr7zdZzbfZtyNjml9BJzNsb3F/KE+O5Clumh0n2URpCLYoTjJLVvnii0kkKbAEBuxWGiZE0Ob8OnPthjTxVaNnN+vwCoi3/hBzvnxWV780/BSB4YhDkFcpMdotpVnhYP3IML/10NhLwJOHZSmORaqS5kOU1hbOzEdrD7arUZ4QV4RUOULDp5X3XUKA/vzczHOkQAX7sc38NV9HDVne7cSHNJ9KTfGOdhVlGyb0WN1YfjlQFPMm2H+RhbQ2tuxSvbIYPi3yKXb94oFW8MWJ8HqwX17Rll4YcHAjzHPqyZCp3aNBwI9FJQzZMBidm9qygUQPBdD0RIQ+hV+Zy6Fg5jdXTxXwIANEDlVCsRR+ieN8W683UMW2rQSdSoRszxwwe4XpMYRcrjq2MifOWzyod9Zqs7yBQ+uSZQ8Y89bSmf8tOwAhUihCcAoUX1kxqg8LqHHgEkNpyLeTK1WoVXktQRInUkWRz10O1A=
+    secret_access_key:
+      secure: P3I7jXqxCVEWxeojZU0VaNvis3ePBMxnPBLoJI0p4z6zKnzP4MuZ54ssXG3kSQL3EejEBdHzfpRQWSjGCczFv6TmjqJNr14lWR3/nqDSq5WtX6oHkZF0db0cyM3l8T3DqrHFzV5GsKaA+RR/tobS1inX7lYWOfrsq4DuXzo6onlhrKstSuetFnotz4iVHCFAFTD43I/Zo9+umvO6ZyLWKKjDTSjwH7sw6v5DvrkNHbu43QkOCzeabFOcPktUbKk5N32TbkVlzia4HIZ6Z8IwvCWXfm84zY8SniVhgS3bS2Buvv5kcjQcwSSy02gu7wFd5yBq4IbzLS0h24L5cIq+p0oUHtmDErnJJoecdvJ4/rR9xVMzwK/wf68SzH6nHPq7HAyQtiz0RBOnguOd0EfYm2QVeY7XM/66w6vZjVRRd76TJlK6nE76zvHfVTtT+0nyxbFn/ObfTKm/kdKhZNGTN/8vLHu+nlR9i6BjOak1hkFa9//zYjpiKC/pzUZ1widLot8I7TcQW8CnIXVIhoN23v7nAL5XkWagQvlHMcA43/jEsyrpCbi+pgrRK8AR1EuXAJshZ7oeKq3WfelaWFQjxFOtEDzACVnhxGyC91csCjrlGZVyYd0nPQa30iVQVoWndpR7hks8zXdCWiaTawlQpFfdeh+h0fWURzGCBsL0xEA=
+    bucket: clouddocs.f5networks.net
+    acl: authenticated_read
+    local_dir: $BUILD_HTML_DIR
+    upload_dir: $DIST_REPO/travis-builds/$USER_REPO/$TRAVIS_BUILD_NUMBER
+  - provider: pypi
+    user: "$PYPI_USER"
+    password: "$PYPI_PASSWORD"
+    server: https://pypi.python.org.pypi
+    on:
+      tags: true
+    skip_cleanup: true
+
+after_deploy:
+  - echo "Docs published to:"
+  - echo "${AWS_STAGING}/${DIST_REPO}/travis-builds/${USER_REPO}/${TRAVIS_BUILD_NUMBER}"
+
+
+

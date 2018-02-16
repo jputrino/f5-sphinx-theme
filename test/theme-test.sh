@@ -8,7 +8,7 @@ git clone https://$GITHUB_TOKEN:x-oauth-basic@github.com/jputrino/test-deploy.gi
 cd test-deploy
 
 # install dependencies
-pip install requirements.txt
+pip install -R requirements.txt
 
 # build some test docs
 make -C docs/ html

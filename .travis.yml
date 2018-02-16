@@ -25,6 +25,8 @@ deploy:
   - provider: s3
     skip_cleanup: true
     all_branches: true
+    on:
+      repo: $TRAVIS_REPO_SLUG
     access_key_id:
       secure: kt81AMmRezo56y0LWR7Uo1u4cil0skTMMt8DLZ0Lp3gUt7VPAq3XNRMpmi9WW8za80905SHZXNiakiwf2BWfosZka1O1t4Ja5RwZmAH5TcIaCzMRoOo1VDJtvMTtQweeIlrNjebGaxlPmc0+xYIUC1er0Hrlq07OvQZ2jQ9d4WNsVo1KsONy3MaKeTwhMpULr4HZjP6Mi9Llr7zdZzbfZtyNjml9BJzNsb3F/KE+O5Clumh0n2URpCLYoTjJLVvnii0kkKbAEBuxWGiZE0Ob8OnPthjTxVaNnN+vwCoi3/hBzvnxWV780/BSB4YhDkFcpMdotpVnhYP3IML/10NhLwJOHZSmORaqS5kOU1hbOzEdrD7arUZ4QV4RUOULDp5X3XUKA/vzczHOkQAX7sc38NV9HDVne7cSHNJ9KTfGOdhVlGyb0WN1YfjlQFPMm2H+RhbQ2tuxSvbIYPi3yKXb94oFW8MWJ8HqwX17Rll4YcHAjzHPqyZCp3aNBwI9FJQzZMBidm9qygUQPBdD0RIQ+hV+Zy6Fg5jdXTxXwIANEDlVCsRR+ieN8W683UMW2rQSdSoRszxwwe4XpMYRcrjq2MifOWzyod9Zqs7yBQ+uSZQ8Y89bSmf8tOwAhUihCcAoUX1kxqg8LqHHgEkNpyLeTK1WoVXktQRInUkWRz10O1A=
     secret_access_key:

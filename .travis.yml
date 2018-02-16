@@ -4,7 +4,12 @@ env:
   - DIST_REPO="f5-sphinx-theme"
   - USER_REPO=$(echo $TRAVIS_REPO_SLUG | cut -f -1 -d / )
   - BUILD_HTML_DIR=$TRAVIS_BUILD_DIR/test-deploy/docs/_build/html
-  - $AWS_STAGING="https://d3s2z99mfhr69y.cloudfront.net"
+  - AWS_STAGING="https://d3s2z99mfhr69y.cloudfront.net"
+  - secure: "V+e0n4WU7UYZuNzdv9qajv1KU+Okw9mhwK0XlEvow0WQ3vIVzHUXDd7peMoVk0xSO5uFbfmdQbAFymKUZONyJkGiWvJXybLjiQMhU484e24WsYL2rHzV8OAjuYf29NHd7Pmm41mqou1jTfuJkU7bGdLNFKNil3QFFxwDN/7EOZJ8r2EdLOEqvo4dDhkTRbQk4aBXcpK5l3XFW8rWA7FS/bITzG2iEWan/qAFVTsWRG5dlHegusP/pf7EQX2LaZ/97bqLjdS8KmGORE7IU0AkO1vRapj5D6nJF7fKuO3AwzVsDqT9oEqE+K+qSgvLE7KdY1U4ZNo+S4jz+DXEfJ4b6yxOQ+kFCxexDvjnZf4FP2vN/Jt5kZtSzKlB2MIJUpH7GMpffvS24ei9NKHmxF68Mgyerkwj8XmzM5rTPeBNXwvzJsxyP0wy858jSYCmshrby1WuRfEhoXz6ClbOSd1WjRSp4KuNnQ34tp8w1wuNGiCc7PJ/pJaVDlEJxJeE3g7Tk8eRJJoVFpHFINd6sP+SLLz5gQFOGK3pVgxmFQOgJKlTLxVTU4xLDoAW433tpZ182+BdZIopCjHcMTAmcBYbpW9Y4QBHXSb1snwJpC2yVztW975XDT5wd8QPo9WQRjuU2nNvGJ3stM0hy6uIfzLEsY744K2MiLy+MwkhirUrgqY="
+  - secure: "cbMkZzTwrXYcDwObRp/zEjbG2Z/nIkoTarqfy6HnVNjXNj3cuIBhHD7S3nNgyBohjJrACssBnVvbzqgkuzANJaHfldPIk2ZPRqjT2xAIxpHVu3LWDMgPXf2qguP5VDWQ7y3hnuyWBMv8iSZBoUwjcmG0L5ePyYNrV9U0t+HKBnu4eCjHAjs1DztItaLhuIi4iNr40GQM0RdYsMe5/f+/sKNz5GCyzI4PdGXyNdgLIYbda7CDGESnYge0nzD7pMCC+FVT6B7Ds6Q5twGJ7mvcEYBUqW1YdS/Zyp/6I8DbwvGtBF7Y4pp6c382EMSS9pMe5LuHHMhQQy0FDThb8ZuO2SPdAFyvWajmNRIVkAHiB5z2zKpAUPjw5KCAakN6nxwt+vuzn/IeI/sT4Bpycq4MYHpOukACYmJmuGKCf1M8IgMX35KeeEkRRUKdtW18aGddpuhEliCMa1QeuC6bpNY2AlI212d6r8UrexBhPIbFkmf7Pps82F9aVwJrv0Mek5m/bHOPlwf7401CZCv2OY7r8xlm6hntgyUj4HLJWYDyfdW4tacJlM2RKlp8AC3pzVXx+zt431KfdhBqkfT4NDYEL7k2UzIxjMYh1lgs4wHvNJLOFIZ7rYKM0V7cR+TGTPERbtGCIbsdoorzn79MTOUrQy/EGvVJBXA33C5iow5ddhI="
+  # CDN distrubution id
+  - secure: "XXppjwpoQyVJ1iVYzDPZY/kNk1O0Prb6aQw58E03LOeS1AZl7YKuHw2ljlDo5pGtM2/9XsD/0Vbppva7claTXn1vaFD2JERPc2RwwWkbehmBqQIdEkMoUld1SB5j7k0lkHV4QmwcXBo+b+UOtilWdweRFgFBoS6rC7EOw5hKvAO2zFy50BbM8IH9ZH+aQyhEMQrZV0DqNSpY0JpG0ZL4RSMgniDs27TZN8WNDSS9xbYl/0sMvuYXhUV0JdsrHFeyjrNln2rGmvI9LvfkQkOU3gypHQxKVob1qtr2qVyoq65XtuNbqGVBevwbJQt2/rFFlRTw6y3LFNgoWwvBaAXgEZG3s4go3Z/D4q6LRuSACetC/SjK3VJGg0AtIQ9s2vOb8hQnDx2FO5BL3eTJ44AWHxzjyVxj9gw87xG1yGBRG8Wkf+MfHKMh6QjHt3F1t2S7hM3ErOG25Qby1zFkV4damqCmGkqHPycoZqqlp1731m7cJzgH02D5yUyR0BfiMM+Bb/IqVpX7n/8dXqQxNC7AvI5nTwFyVjD2LuVn1UY5njT5I0CT7qpRWRE1YQfgwAr9m5hl7chDI3YcdPE5DqlRQn/iocQryn0VUq4vZJ4rA3fxXcxtqBpblnqNS1J/8b1fEnOsNPpR+7c9LPYeOrpJWzbUVHlyOgyTwMkmuK2u984="
+
 services:
 - docker
 language: python
@@ -15,6 +20,7 @@ before_install:
 - git config --global user.name "f5-travisci"
 install:
 - gem install html-proofer
+- pip install awscli
 - pip install ./
 script:
 - htmlproofer --check_html --checks-to-ignore "LinkCheck,ImageCheck,ScriptCheck" --report_invalid_tags
@@ -26,10 +32,8 @@ deploy:
   on:
     repo: $TRAVIS_REPO_SLUG
     all_branches: true
-  access_key_id:
-    secure: "p0fNNAWq0sYMqH0LS4c90n5mZ/sEwJAgHD433Uv8OYJSGoKquzHDLYHqce3QWANW2s7M9hIOyj08yk2TAjDHMwNpY/gQkWTDbzro07cmfBFGZTDWyM/+t+UsY01/kaThd3TZp+R5UTSHu+epNSrLGhrB7wkMzgoT3LWM6jS8BPN1pty71ASzfqKgmZA6qXahgxNMIyFBlneaC5XpTmb96RrshgqVGgEqbr+gk5I6D5u5XxTFDm2gIIZZ5BqzomuLVKqaHAD0fM2J32vEeur6bCNLvR0Mfs0teIV3YoNXyHS6QpUTE8SXpV3eHWEHNrGgZM+x1p6zpkabkFSIqdU0S9SykqT81noXGRMx6p8SzJLEYjahiQjPsslEVCVKCKHMhv1EGUjilwXbmKbI8ehrCRoa+sUOgyKg0L0j6KqBssdeQr2/XcG36oGSW/1vW06f8UbTTLsEn/WxMLzXNVNEyObBVIcI5IDCfl6S1DoR5ki9YNEfqAAsx2UYSmlRR0gW3UrNTOS6BTeAAnUUFvXz6tStvfHRIG38B8hAzvWoc+wQPQOjJRbA+aofcJKurWdSzDU4jYsyAbuVWH+AXx6vz6RtalLlCmZA+yIYg6YbqVkuT97+XxB35MvO+AY7jZcQ95X+naYTrhmKZMF28b/708UidqC0+Ajc9Dzv6s/ZbJ8="
-  secret_access_key:
-    secure: "gSeAaw8SK0a0kOK9ZYUwIYGE2H2e5Qm/HIl1lJP75W6F+Wu37Y7QKscvQFJ/9Sge3bo3ZCvBjhttlhBH1LGaIRxo8B0aF/AUw9dL8KJqLAWw7e6kp/rBE3UTvPz7bHTT8jXQvkLpeN3mtQxFb3lMIc/o6zf46jA8MGXowLBsM7G8OogJExF2hZxBOkED+PHsIQnN/9wwAbE4aQvJZG3VtlnZhLC4NCRaV5nqtsYrayeYsrVW3dkrRYghyxP7RrX7qHqCqNW3j8vPP4Zh1ljc0EkP4DxX2tLgiDAI/SPx+4p83yc7KkNwNX2PVRpX6MalDflFl9Hw4z1sekVREdynWIhodMfJblcfMWn26+VyN62D+YDTGb7yksJWAJGduP4UBnCvviwbHpOs4AN7PqG1i2BDJtcJiFPuRJ4KN4eHZ01DnIj7sYnyRaZiFhyeeGENX39q0D3BWXYxn+IRmsVHeJ+ey5e3P286w7lxsK/1BHd/1aPh0TiWaEblUl4VSHSMteDWCm5B7bXNq9W3YMnH1daEP5r7Cnj3jusg0B7lbA9u5BXlNiLEyTjfftxkbKqyK22btE2j/Rv2efaUxdzFxtyRLmNrAUq9wMzvvZbKFTdR5GSE/OzgFiAIVkG3cydqD2+4jOoUhZ4BWS1Skq3bpwx4+9wujqG5DLmfZ/sYLgE="
+  access_key_id: $ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: clouddocs.f5networks.net
   acl: authenticated_read
   local_dir: $BUILD_HTML_DIR
@@ -45,6 +49,8 @@ deploy:
 after_deploy:
   - echo "Docs published to:"
   - echo "${AWS_STAGING}/${DIST_REPO}/travis-builds/${USER_REPO}/${TRAVIS_BUILD_NUMBER}"
+  # create CloudFront invalidation to clear old objects from cache
+  - aws cloudfront create-invalidation --distribution-id $CDN_DIST_ID --paths "$DIST_REPO/travis-builds/$USER_REPO/$TRAVIS_BUILD_NUMBER/*"
 
 
 

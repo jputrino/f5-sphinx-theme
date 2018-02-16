@@ -26,18 +26,17 @@ script:
 - htmlproofer --check_html --checks-to-ignore "LinkCheck,ImageCheck,ScriptCheck" --report_invalid_tags
   --report-script-embeds f5_sphinx_theme/
 - test/theme-test.sh
+- cp -R $BUILD_HTML_DIR ${DIST_REPO}/travis-builds/${USER_REPO}/${TRAVIS_BUILD_NUMBER}
+addons:
+  artifacts: true
+  env:
+  - ARTIFACTS_KEY=$ACCESS_KEY_ID
+  - ARTIFACTS_SECRET=$AWS_SECRET_ACCESS_KEY
+  - ARTIFACTS_BUCKET=clouddocs.f5networks.net
+  paths:
+  - ${DIST_REPO}/travis-builds/${USER_REPO}/${TRAVIS_BUILD_NUMBER}
+
 deploy:
-- provider: s3
-  skip_cleanup: true
-  on:
-    repo: $TRAVIS_REPO_SLUG
-    all_branches: true
-  access_key_id: $ACCESS_KEY_ID
-  secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: clouddocs.f5networks.net
-  acl: authenticated_read
-  local_dir: $BUILD_HTML_DIR
-  upload_dir: $DIST_REPO/travis-builds/$USER_REPO/$TRAVIS_BUILD_NUMBER
 - provider: pypi
   user: "$PYPI_USER"
   password: "$PYPI_PASSWORD"
@@ -45,12 +44,23 @@ deploy:
   on:
     tags: true
   skip_cleanup: true
+#- provider: s3
+#  skip_cleanup: true
+#  on:
+#    repo: $TRAVIS_REPO_SLUG
+#    all_branches: true
+#  access_key_id: $ACCESS_KEY_ID
+#  secret_access_key: $AWS_SECRET_ACCESS_KEY
+#  bucket: clouddocs.f5networks.net
+#  acl: authenticated_read
+#  local_dir: $BUILD_HTML_DIR
+#  upload_dir: $DIST_REPO/travis-builds/$USER_REPO/$TRAVIS_BUILD_NUMBER
 
 after_deploy:
   - echo "Docs published to:"
   - echo "${AWS_STAGING}/${DIST_REPO}/travis-builds/${USER_REPO}/${TRAVIS_BUILD_NUMBER}"
   # create CloudFront invalidation to clear old objects from cache
-  - aws cloudfront create-invalidation --distribution-id $CDN_DIST_ID --paths "$DIST_REPO/travis-builds/$USER_REPO/$TRAVIS_BUILD_NUMBER/*"
+  #- aws cloudfront create-invalidation --distribution-id $CDN_DIST_ID --paths "$DIST_REPO/travis-builds/$USER_REPO/$TRAVIS_BUILD_NUMBER/*"
 
 
 

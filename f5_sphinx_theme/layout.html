@@ -56,9 +56,11 @@
       </span>
       </nav>
       </div>
+    {%- block extralinks %}
+    {% endblock %}
   {%- endif %}
   
-  {-% block main %}
+  {%- block main %}
   <article class="site-article">
     <article class="docs-container site-article-inner">
       <nav class="site-breadcrumb-nav site-nav">
@@ -81,7 +83,7 @@
   {% endblock %}
 </div>
 
-
+{% endblock %}
 
 </div>
 

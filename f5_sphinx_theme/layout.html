@@ -38,8 +38,9 @@
 
 <div id="docs-wrapper" itemscope itemtype="http://schema.org/Article">
 
-<div class="main-content clearfix">
 {% block content %}
+
+<div class="main-content clearfix">
   {%- if sidebars != None %}
     <div id="sidebarNav" class="site-hide-section-nav hide-nav">
       <nav class="site-page-nav site-nav section-nav" id="sidebar">
@@ -55,13 +56,11 @@
       </span>
       </nav>
       </div>
-
- {%- endif %}
-
-
-{% block content %}
- 
- <article class="site-article">
+  
+  {%- endif %}
+  
+  {-% block main %}
+  <article class="site-article">
     <article class="docs-container site-article-inner">
       <nav class="site-breadcrumb-nav site-nav">
         {%- block breadcrumb %}
@@ -80,12 +79,13 @@
     </article>
     
   </article>
+  {% endblock %}
 </div>
 
-
-
-</div>
 {% endblock %}
+
+</div>
+
 
 {%- block footer %}
   {% include "footer.html" %}

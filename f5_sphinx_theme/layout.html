@@ -1,7 +1,23 @@
-<!DOCTYPE html>
-{% extends "classic/layout.html" %}
+{#
+ Copyright 2017-18 F5 Networks
 
-{% set css_files = css_files + ["_static/css/f5.css", "_static/css/custom.css"] %}
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+#}
+
+<!DOCTYPE html>
+{% extends "basic/layout.html" %}
+
+{% set css_files = css_files + ["_static/css/f5-theme.css", "_static/css/f5.css", "_static/css/custom.css"] %}
 {# set script_files = script_files + ["https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js", "_static/js/bootstrap.min.js"] #}
 
 {%- block extrahead %}
@@ -14,43 +30,63 @@
 {%- block sidebar1 %}{% endblock %}
 {%- block sidebar2 %}{% endblock %}
 
+<div class="site-wrapper"></div>
+
 {%- block header %}
   {% include "header.html" %}
 {% endblock %}
 
-{% block content %}
-  <div class="container-fluid">
-    <div class="row d-flex">
-      <div class="col-sm-3 col-md-3 sidebartoc">
-         <h4><a href="{{ url_root }}">{{ project }} {{ release }}</a></h4>
-        {%- if sidebars != None %}
-          {%- for sidebartemplate in sidebars %}
-            {%- include sidebartemplate %}
-          {%- endfor %}
-        {% endif %}
-      </div>
-      <div class="col-md-offset-3 col-sm-offset-3 main">
-        {%- block breadcrumb %}
-          {% include "breadcrumb.html" %}
-        {% endblock %}
-        {% block body %}{% endblock %}
-        {% if (next or prev) and theme_next_prev_link%}
-		     <div class="row next-prev-btn-row">
-           <div class="col-lg-12">
-           {% if prev %}
-		        <a href="{{ prev.link|e }}" title="{{ prev.title|striptags|e }}" accesskey="p" class="btn btn-primary pull-left"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous</a>
-           {% endif %}
-           {% if next %}
-              <a href="{{ next.link|e }}" title="{{ next.title|striptags|e }}" accesskey="n" class="btn btn-primary pull-right">Next <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
-           {% endif %}
-		     </div>
-         </div>
-        {% endif %}
-      </div>
-    </div>
-  </div>
+<div id="docs-wrapper" itemscope itemtype="http://schema.org/Article">
 
+<div class="main-content clearfix">
+{% block content %}
+  {%- if sidebars != None %}
+    <div id="sidebarNav" class="site-hide-section-nav hide-nav">
+      <nav class="site-page-nav site-nav section-nav" id="sidebar">
+        <button onclick="w3_close()" class="hide-large"><i class="fa fa-times"></i></button>
+        <h5>{{ docstitle }} {{ version }}</h5>
+          {% include "searchbox.html" %}
+      <hr>
+      {% include "localtoc.html" %}
+      <hr>
+      <h5>Site Contents</h5>
+      <span class="site-nav-list site-page-nav-list">
+          {% include "globaltoc.html" %}
+      </span>
+      </nav>
+      </div>
+
+ {%- endif %}
+
+
+{% block content %}
+ 
+ <article class="site-article">
+    <article class="docs-container site-article-inner">
+      <nav class="site-breadcrumb-nav site-nav">
+        {%- block breadcrumb %}
+          <ul class="site-breadcrumb-list">
+            <li class="breadcrumb-item"><button class="hide-large" onclick="w3_open()">&#9776;</button>&#x20
+            <a href="/">{{ theme_site_name|striptags|e }}</a> &gt; <a href="{{ pathto(master_doc) }}">{{ project|striptags|e }} </a> &gt; {{ title|striptags|e }}</li>
+          </ul>
+        {% endblock %}
+      </nav>
+
+      <div class="site-article-body clearfix" id="articleBody">
+      
+        {{ body }}
+      
+      </div>
+    </article>
+    
+  </article>
+</div>
+
+
+
+</div>
 {% endblock %}
+
 {%- block footer %}
   {% include "footer.html" %}
   <!-- Bootstrap core JavaScript
@@ -60,5 +96,13 @@
   <script src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
   <script type="text/javascript">
     jQuery.noConflict(true)
+  </script>
+  <script type="application/javascript">
+    function w3_open() {
+        document.getElementById("sidebarNav").style.display = "block";
+    }
+    function w3_close() {
+        document.getElementById("sidebarNav").style.display = "none";
+    }
   </script>
 {%- endblock %}
